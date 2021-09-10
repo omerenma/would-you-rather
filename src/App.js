@@ -1,25 +1,65 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./components/Home";
+import Nav from "./components/Appbar";
+import NewQuestion from "./components/NewQuestion";
+import Leaderboard from "./components/LeaderBoard";
+import PollsDetails from "./components/PollsDetails";
+import NotFound from "./components/NotFound";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+import Login from "./components/Login";
+import share from "./actions/share";
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      authedUser: "",
+    };
+  }
+  componentDidMount() {
+    this.props.dispatch(share());
+  }
+  setAuthedUser = (id) => {
+    // This method is to  set the auth user to the id of the user clicked in the login  select form
+    this.setState(() => ({ id }));
+  };
+
+  render() {
+    const { id } = this.state;
+    const { users, auth } = this.props;
+
+    return (
+      <div className="App">
+        <Router>
+          {auth === null || auth.id === "undefined" ? (
+            <div className="App-header">
+              <Route exact path="/">
+                <Login authedUser={this.setAuthedUser} users={users} id={id} />
+              </Route>
+            </div>
+          ) : (
+            <div>
+              <Switch>
+                <Route exact path="/home" component={Home} />
+                <Route path="/add" component={NewQuestion} />
+                <Route path="/leaderboard" component={Leaderboard} />
+                <Route path="/questions/:id" component={PollsDetails} />
+                <Route component={NotFound} />
+              </Switch>
+            </div>
+          )}
+        </Router>
+      </div>
+    );
+  }
 }
-
-export default App;
+const mapStateToProps = ({ users, auth }) => {
+  return {
+    users,
+    auth,
+  };
+};
+export default connect(mapStateToProps)(App);
