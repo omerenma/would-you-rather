@@ -124,7 +124,7 @@ class Home extends Component {
                     style={{ display: "flex", width: "auto", height: "150px" }}
                   >
                     <Avatar
-                      src={users[questions[item].author].avatartURL}
+                      src={users[questions[item].author].avatarURL}
                       style={{
                         marginLeft: 20,
                         marginTop: 40,

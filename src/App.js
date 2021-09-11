@@ -46,7 +46,7 @@ class App extends Component {
                 <Route path="/add" component={NewQuestion} />
                 <Route path="/leaderboard" component={Leaderboard} />
                 <Route path="/questions/:id" component={PollsDetails} />
-                <Route component={NotFound} />
+                {/* <Route component={NotFound} /> */}
               </Switch>
             </div>
           )}
