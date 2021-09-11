@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core";
 
 import Nav from "./Appbar";
-import Avatar from "react-avatar";
+import {Avatar} from "@material-ui/core";
 
 function TabPanel({ children, value, index, ...other }) {
   return (
@@ -81,7 +81,9 @@ class Home extends Component {
                   <Paper
                     style={{ width: 400, height: "auto", margin: "10px auto" }}
                   >
-                    <Typography>{users[questions[item].author].name}</Typography>
+                    <Typography>
+                      {users[questions[item].author].name}
+                    </Typography>
                     <Card
                       style={{
                         display: "flex",
@@ -94,16 +96,16 @@ class Home extends Component {
                         style={{
                           marginLeft: 20,
                           marginTop: 40,
-                          
                         }}
                       />
                       <Typography style={{ marginLeft: 70, marginTop: 20 }}>
                         Would You Rather...
                       </Typography>
-                      <Button 
-                      component={Link}
-                      to={'/questions/:id' + questions[item].id}
-                      style={{ marginLeft: -120, marginTop: 70 }}>
+                      <Button
+                        component={Link}
+                        to={"/questions/:id" + questions[item].id}
+                        style={{ marginLeft: -120, marginTop: 70 }}
+                      >
                         View Poll
                       </Button>
                     </Card>
@@ -112,31 +114,35 @@ class Home extends Component {
               );
             }
           } else {
-            if(answeredQuestion.some((e) => questions[item].id.includes(e))){
+            if (answeredQuestion.some((e) => questions[item].id.includes(e))) {
               return (
-                <Paper style={{ width: 400, height: "auto", margin: "10px auto" }}>
-                <Typography>{users[questions[item].author].name}</Typography>
-                <Card style={{ display: "flex", width: "auto", height: "150px" }}>
-                  <Avatar
-                    src={users[questions[item].author].avatartURL}
-                    style={{
-                      marginLeft: 20,
-                      marginTop: 40,
-                      
-                    }}
-                  />
-                  <Typography style={{ marginLeft: 70, marginTop: 20 }}>
-                    Would You Rather...
-                  </Typography>
-                  <Button 
-                  component={Link}
-                  to={'questions/:id' + questions[item].id}
-                  style={{ marginLeft: -120, marginTop: 70 }}>
-                    View Poll
-                  </Button>
-                </Card>
-              </Paper>
-              )
+                <Paper
+                  style={{ width: 400, height: "auto", margin: "10px auto" }}
+                >
+                  <Typography>{users[questions[item].author].name}</Typography>
+                  <Card
+                    style={{ display: "flex", width: "auto", height: "150px" }}
+                  >
+                    <Avatar
+                      src={users[questions[item].author].avatartURL}
+                      style={{
+                        marginLeft: 20,
+                        marginTop: 40,
+                      }}
+                    />
+                    <Typography style={{ marginLeft: 70, marginTop: 20 }}>
+                      Would You Rather...
+                    </Typography>
+                    <Button
+                      component={Link}
+                      to={"questions/:id" + questions[item].id}
+                      style={{ marginLeft: -120, marginTop: 70 }}
+                    >
+                      View Poll
+                    </Button>
+                  </Card>
+                </Paper>
+              );
             }
           }
         })}
