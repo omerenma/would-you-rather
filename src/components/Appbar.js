@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Paper, Avatar } from "@material-ui/core";
 import "../App.css";
 
 class NavBar extends Component {
-  removeItem = () => {
-    localStorage.removeItem("login");
-  };
   render() {
     const { users, id } = this.props;
     return (
@@ -20,11 +17,12 @@ class NavBar extends Component {
             display: "flex",
             justifyContent: "space-around",
             alignItems: "center",
+            width: "100%",
           }}
         >
           {/* Display of flex */}
 
-          <div>
+          <div style={{paddingRight:'30px'}}>
             <Link to="/home">Home</Link>
             <Link to="/add">New Question</Link>
             <Link to="/leaderboard">Leader Board</Link>
@@ -50,9 +48,7 @@ class NavBar extends Component {
             <Link
               to="/"
               onClick={() => {
-                this.removeItem();
-                this.props.history.push("/");
-                window.location.reload(true);
+                localStorage.removeItem("login");
               }}
             >
               Logout
@@ -70,4 +66,4 @@ const mapStateToProps = ({ users, auth }) => {
     id: auth.id,
   };
 };
-export default connect(mapStateToProps)(withRouter(NavBar));
+export default connect(mapStateToProps)(NavBar);

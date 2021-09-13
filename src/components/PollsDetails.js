@@ -24,7 +24,7 @@ class PollsDetails extends Component {
   render() {
     const { option } = this.state;
     console.log(option, "options");
-    const { users, questions, authedUser } = this.props;
+    const { users, questions } = this.props;
     const questionId = this.props.match.params.id.substring(3);
     if (questions[questionId] === undefined) {
       return <Redirect to="/NotFound" />;

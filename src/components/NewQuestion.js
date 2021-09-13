@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter, Redirect } from "react-router";
-import { Link } from "react-router-dom";
-import { Form, Button } from "semantic-ui-react";
+import { withRouter } from "react-router";
 import { handleAddQuestion } from "../actions/questions";
 import Appbar from './Appbar'
 class Newquestion extends Component {
@@ -29,8 +27,10 @@ class Newquestion extends Component {
   render() {
     return (
       <div>
+        <div style={{marginTop:'-70px'}}>
         <Appbar />
-        <div style={{ margin: "10% 40%" }}>
+        </div>
+        <div style={{ margin: "10% 5%" }}>
           <h1>Add New Question</h1>
           <form>
             <div>

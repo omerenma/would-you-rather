@@ -47,7 +47,6 @@ class Login extends Component {
           </Card>
         </form>
         <Button
-          type="submit"
           onClick={(e) => {
             this.props.history.push('/home')
             window.location.reload(true)
@@ -60,4 +59,9 @@ class Login extends Component {
   }
 }
 
-export default withRouter(connect()(Login));
+const mapStateToProps = ({users}) => {
+  return {
+    users
+  }
+}
+ export default withRouter(connect(mapStateToProps)(Login));

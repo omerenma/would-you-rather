@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Tabs,
   Tab,
@@ -14,7 +12,7 @@ import {
 } from "@material-ui/core";
 
 import Nav from "./Appbar";
-import {Avatar} from "@material-ui/core";
+import { Avatar } from "@material-ui/core";
 
 function TabPanel({ children, value, index, ...other }) {
   return (
@@ -55,8 +53,9 @@ class Home extends Component {
   render() {
     // Get the logged In user's answered and unanswered question
     const { id, users, questions } = this.props;
-    console.log(users[id]["answers"], "User logged In");
-    const answeredQuestion = Object.keys(users[id]["answers"]);
+
+    const answeredQuestion =
+      users === undefined ? null : Object.keys(users[id]["answers"]);
     const sortedQuestions = Object.keys(questions).sort(
       (a, b) => questions[b].timestamps - questions[a].timestamps
     );
@@ -69,8 +68,16 @@ class Home extends Component {
           onChange={this.handleChange}
           aria-label="simple tabs example"
         >
-          <Tab label="Unanswered Question" {...a11yProps(0)} />
-          <Tab label="Answered Question" {...a11yProps(1)} />
+          <Tab
+            label="Unanswered Question"
+            {...a11yProps(0)}
+            style={{ color: "black" }}
+          />
+          <Tab
+            label="Answered Question"
+            {...a11yProps(1)}
+            style={{ color: "black" }}
+          />
         </Tabs>
 
         {sortedQuestions.map((item, i) => {
@@ -153,7 +160,7 @@ class Home extends Component {
 }
 const mapStateToProps = ({ questions, users, auth }) => {
   return {
-    users,
+    users: users && users,
     questions,
     id: auth.id,
   };
