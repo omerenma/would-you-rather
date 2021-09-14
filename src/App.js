@@ -10,20 +10,23 @@ import NotFound from "./components/NotFound";
 import "./App.css";
 import Login from "./components/Login";
 import share from "./actions/share";
+import store from "./store";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       authedUser: "",
+      id: null,
     };
   }
-  componentDidMount() {
+  componentWillMount() {
     this.props.dispatch(share());
   }
   setAuthedUser = (id) => {
     // This method is to  set the auth user to the id of the user clicked in the login  select form
     this.setState(() => ({ id }));
+    console.log(id, "iddddddddddddddd");
   };
 
   render() {
@@ -33,11 +36,17 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          {auth === null || auth.id === "undefined" ? (
+          {auth === null ? (
             <div className="App-header">
-              <Route exact path="/">
-                <Login authedUser={this.setAuthedUser} users={users} id={id} />
-              </Route>
+              <Route
+                exact
+                path="/"
+                component={Login}
+                authedUser={this.setAuthedUser}
+                users={users}
+                id={id}
+              />
+              {/* <Login authedUser={this.setAuthedUser} users={users} id={id} /> */}
             </div>
           ) : (
             <div className="App-header">
@@ -54,7 +63,7 @@ class App extends Component {
                 <Route path="/add" component={NewQuestion} />
                 <Route path="/leaderboard" component={Leaderboard} />
                 <Route path="/questions/:id" component={PollsDetails} />
-                {/* <Route component={NotFound} /> */}
+                <Route component={NotFound} />
               </Switch>
             </div>
           )}

@@ -2,16 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { handleAddQuestion } from "../actions/questions";
-import Appbar from './Appbar'
+import Appbar from "./Appbar";
 class Newquestion extends Component {
   state = {
     optionOne: "",
     optionTwo: "",
   };
 
-  componentDidMount(){ 
-    !this.props.auth ? this.props.history.push('/') : console.log('Auth user')
-}
+
   handleChange = (e) => {
     const value = e.target.value;
     this.setState({
@@ -24,11 +22,12 @@ class Newquestion extends Component {
     this.props.dispatch(handleAddQuestion(optionOne, optionTwo));
     this.props.history.push("/home");
   };
+
   render() {
     return (
       <div>
-        <div style={{marginTop:'-70px'}}>
-        <Appbar />
+        <div style={{ marginTop: "-70px" }}>
+          <Appbar />
         </div>
         <div style={{ margin: "10% 5%" }}>
           <h1>Add New Question</h1>
@@ -67,7 +66,6 @@ class Newquestion extends Component {
                 type="submit"
                 value="Submit"
                 onClick={this.handleQuetion}
-                
               />
             </div>
           </form>
@@ -77,9 +75,9 @@ class Newquestion extends Component {
   }
 }
 
-const mapStateToProps = ({auth}) => {
-  return{
-    auth
-  }
-}
+const mapStateToProps = ({ auth }) => {
+  return {
+    auth,
+  };
+};
 export default withRouter(connect(mapStateToProps)(Newquestion));

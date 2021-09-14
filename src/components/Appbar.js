@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Paper, Avatar } from "@material-ui/core";
 import "../App.css";
+import store from "../store";
 
 class NavBar extends Component {
   render() {

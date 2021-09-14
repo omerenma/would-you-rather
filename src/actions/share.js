@@ -7,6 +7,8 @@ import { setAuthedUser } from "../actions/setAuthedUser";
 import store from "../store";
 const auth = store.getState().auth;
 
+// let AuthedUser = 'tylermcginnis'
+
 // Get the save auth in Login from local storage and pass it to setAuthedUser
 
 let loginUser = localStorage.getItem("login");

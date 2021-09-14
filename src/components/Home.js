@@ -57,7 +57,7 @@ class Home extends Component {
     const answeredQuestion =
       users === undefined ? null : Object.keys(users[id]["answers"]);
     const sortedQuestions = Object.keys(questions).sort(
-      (a, b) => questions[b].timestamps - questions[a].timestamps
+      (a, b) => questions[b].timestamp - questions[a].timestamp
     );
 
     return (

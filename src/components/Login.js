@@ -46,10 +46,11 @@ class Login extends Component {
             </Select>
           </Card>
         </form>
+
         <Button
           onClick={(e) => {
-            this.props.history.push('/home')
-            window.location.reload(true)
+            this.props.history.push("/home");
+            window.location.reload(true);
           }}
         >
           Login
@@ -59,9 +60,9 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = ({users}) => {
+const mapStateToProps = ({ users }) => {
   return {
-    users
-  }
-}
- export default withRouter(connect(mapStateToProps)(Login));
+    users,
+  };
+};
+export default withRouter(connect(mapStateToProps)(Login));
