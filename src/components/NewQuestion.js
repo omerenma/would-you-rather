@@ -9,7 +9,6 @@ class Newquestion extends Component {
     optionTwo: "",
   };
 
-
   handleChange = (e) => {
     const value = e.target.value;
     this.setState({
@@ -26,7 +25,7 @@ class Newquestion extends Component {
   render() {
     return (
       <div>
-        <div style={{ marginTop: "-70px" }}>
+        <div style={{ marginTop: "20px" }}>
           <Appbar />
         </div>
         <div style={{ margin: "10% 5%" }}>

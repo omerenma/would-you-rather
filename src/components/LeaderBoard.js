@@ -22,7 +22,7 @@ class Leaderboard extends Component {
       <div>
         <Nav />
         {sorted.map((sort, i) => (
-          <Card elevation={1} style={{ width: 700, margin: "30px auto" }}>
+          <Card elevation={1} style={{ width: 700, margin: "30px auto" }} key={i}>
             <div className="card-container">
               <Avatar src={users[sort].avatarURL} />
               <div className="card-content">

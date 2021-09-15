@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Card, Select, MenuItem, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
+import { setAuthedUser } from "../actions/setAuthedUser";
 import "../App.css";
 
 class Login extends Component {
@@ -25,8 +26,8 @@ class Login extends Component {
     localStorage.setItem("login", id);
     return (
       <div>
-        <h1>Login</h1>
         <form>
+        <h1 style={{color:'black'}}>Would You Rather?</h1>
           <Card raised={true}>
             <Select
               style={{ width: 300 }}
@@ -36,9 +37,9 @@ class Login extends Component {
             >
               {Object.keys(users).map((user) => (
                 <MenuItem
-                  value={users[user].name}
+                  value={users[user].id}
                   key={users[user].id}
-                  onClick={() => this.props.authedUser(users[user].id)}
+                  // onClick={() => this.props.authedUser(users[user].id)}
                 >
                   {users[user].name}
                 </MenuItem>
@@ -49,8 +50,10 @@ class Login extends Component {
 
         <Button
           onClick={(e) => {
-            this.props.history.push("/home");
-            window.location.reload(true);
+             e.preventDefault();
+            this.props.dispatch(setAuthedUser(this.state.user));
+            // this.props.history.push("/home");
+            // window.location.reload(true);
           }}
         >
           Login

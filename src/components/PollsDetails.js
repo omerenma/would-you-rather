@@ -115,6 +115,9 @@ class PollsDetails extends Component {
                   </Button>
                   <Button
                     onClick={() => {
+                      if (!this.state.option) {
+                        return null
+                      }
                       this.props.dispatch(handleAddAnswer(option, questionId));
                     }}
                   >

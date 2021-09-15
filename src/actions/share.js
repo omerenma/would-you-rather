@@ -12,13 +12,14 @@ const auth = store.getState().auth;
 // Get the save auth in Login from local storage and pass it to setAuthedUser
 
 let loginUser = localStorage.getItem("login");
+const AUTHED_ID = 'tylermcginnis'
 
 const handleGetInitialData = () => (dispatch) => {
   _getUsers().then((users) => {
     dispatch(getUsers(users));
-    dispatch(setAuthedUser(loginUser));
   });
   _getQuestions().then((questions) => dispatch(getQuestions(questions)));
 };
+// dispatch(setAuthedUser(loginUser));
 
 export default handleGetInitialData;

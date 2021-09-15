@@ -25,7 +25,7 @@ function TabPanel({ children, value, index, ...other }) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <div>{children}</div>
         </Box>
       )}
     </div>
@@ -55,7 +55,7 @@ class Home extends Component {
     const { id, users, questions } = this.props;
 
     const answeredQuestion =
-      users === undefined ? null : Object.keys(users[id]["answers"]);
+      users === undefined ? "" : Object.keys(users[id.id]["answers"]);
     const sortedQuestions = Object.keys(questions).sort(
       (a, b) => questions[b].timestamp - questions[a].timestamp
     );
@@ -84,13 +84,11 @@ class Home extends Component {
           if (this.state.value === 0) {
             if (!answeredQuestion.some((e) => questions[item].id.includes(e))) {
               return (
-                <TabPanel value={this.state.value} index={0}>
+                <TabPanel value={this.state.value} index={0} key={i}>
                   <Paper
                     style={{ width: 400, height: "auto", margin: "10px auto" }}
                   >
-                    <Typography>
-                      {users[questions[item].author].name}
-                    </Typography>
+                    <div>{users[questions[item].author].name}</div>
                     <Card
                       style={{
                         display: "flex",
@@ -105,9 +103,9 @@ class Home extends Component {
                           marginTop: 40,
                         }}
                       />
-                      <Typography style={{ marginLeft: 70, marginTop: 20 }}>
+                      <p style={{ marginLeft: 70, marginTop: 20 }}>
                         Would You Rather...
-                      </Typography>
+                      </p>
                       <Button
                         component={Link}
                         to={"/questions/:id" + questions[item].id}
@@ -123,12 +121,15 @@ class Home extends Component {
           } else {
             if (answeredQuestion.some((e) => questions[item].id.includes(e))) {
               return (
+                <TabPanel value={this.state.value} index={1} key={i}>
+
                 <Paper
                   style={{ width: 400, height: "auto", margin: "10px auto" }}
                 >
-                  <Typography>{users[questions[item].author].name}</Typography>
+                  <p>{users[questions[item].author].name}</p>
                   <Card
                     style={{ display: "flex", width: "auto", height: "150px" }}
+                    
                   >
                     <Avatar
                       src={users[questions[item].author].avatarURL}
@@ -137,9 +138,9 @@ class Home extends Component {
                         marginTop: 40,
                       }}
                     />
-                    <Typography style={{ marginLeft: 70, marginTop: 20 }}>
+                    <p style={{ marginLeft: 70, marginTop: 20 }}>
                       Would You Rather...
-                    </Typography>
+                    </p>
                     <Button
                       component={Link}
                       to={"questions/:id" + questions[item].id}
@@ -149,11 +150,12 @@ class Home extends Component {
                     </Button>
                   </Card>
                 </Paper>
+                </TabPanel>
               );
             }
           }
         })}
-        <TabPanel value={this.state.value} index={1}></TabPanel>
+        <TabPanel value={this.state.value} index={1} ></TabPanel>
       </div>
     );
   }
@@ -162,7 +164,7 @@ const mapStateToProps = ({ questions, users, auth }) => {
   return {
     users: users && users,
     questions,
-    id: auth.id,
+    id: auth,
   };
 };
 export default connect(mapStateToProps)(Home);
